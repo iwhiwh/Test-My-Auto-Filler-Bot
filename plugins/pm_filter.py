@@ -133,8 +133,19 @@ async def next_page(bot, query):
     if settings['button']:
         btn = [
             [
-                InlineKeyboardButton(
-                    text=f"♡ [{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+                
+            for file in files
+        ]
+    btn.insert(0, 
+        [
+            InlineKeyboardButton(f' 👇 {search} 👇 ', 'qinfo')
+        ]
+    )
+    btn.insert(1, 
+         [
+             InlineKeyboardButton(f'ɪɴꜰᴏ', 'reqinfo'),
+   InlineKeyboardButton(
+                    text=f"[{get_size(file.file_size)}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}", callback_data=f'files#{file.file_id}'
                 ),
             ]
             for file in files
@@ -146,21 +157,9 @@ async def next_page(bot, query):
                     text=f"♡{file.file_name}", callback_data=f'files#{file.file_id}'
                 ),
                 InlineKeyboardButton(
-                    text=f"♡ {get_size(file.file_size)}",
-                    callback_data=f'files_#{file.file_id}',
+                    text=f"[{get_size(file.file_size)}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}", callback_data=f'files_#{file.file_id}',
                 ),
-            ]
-            for file in files
-        ]
-    btn.insert(0, 
-        [
-            InlineKeyboardButton(f' 👇 {search} 👇 ', 'qinfo')
-        ]
-    )
-    btn.insert(1, 
-         [
-             InlineKeyboardButton(f'ɪɴꜰᴏ', 'reqinfo'),
-             InlineKeyboardButton(f'ᴍᴏᴠɪᴇ', 'minfo'),
+            ]          InlineKeyboardButton(f'ᴍᴏᴠɪᴇ', 'minfo'),
              InlineKeyboardButton(f'sᴇʀɪᴇs', 'sinfo'),
              InlineKeyboardButton(f'ᴛɪᴘs', 'tinfo')
          ]
@@ -1076,7 +1075,7 @@ async def auto_filter(client, msg, spoll=False):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"❍ [{get_size(file.file_size)}] {file.file_name}", callback_data=f'{pre}#{file.file_id}'
+                    text=f"[{get_size(file.file_size)}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}", callback_data=f'{pre}#{file.file_id}'
                 ),
             ]
             for file in files
@@ -1089,8 +1088,7 @@ async def auto_filter(client, msg, spoll=False):
                     callback_data=f'{pre}#{file.file_id}',
                 ),
                 InlineKeyboardButton(
-                    text=f"❍ {get_size(file.file_size)}",
-                    callback_data=f'{pre}#{file.file_id}',
+                    text=f"[{get_size(file.file_size)}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}", callback_data=f'{pre}#{file.file_id}',
                 ),
             ]
             for file in files
